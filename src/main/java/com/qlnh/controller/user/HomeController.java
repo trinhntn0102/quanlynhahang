@@ -28,4 +28,9 @@ public class HomeController {
 	public String register(){
 		return "restaurant/register";
 	}
+	
+	@RequestMapping(value= {ConstUrl.CHANGE_PASSWORD})
+	public String changePassword(){
+		return "restaurant/changepass";
+	}
 }
