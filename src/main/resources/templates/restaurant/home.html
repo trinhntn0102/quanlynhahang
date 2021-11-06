@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/layout-user/layout-user.html :: dynamic(~{::body})}">
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+</head>
+<body>
+	<div  class="container">
+    <div class="row">
+      <div id="content" class="col-xs-12">
+        <div th:insert="~{/layout-user/layout/banner.html :: banner}"></div>
+          <!-- Product Tab Start 
+          <div id="product-tab" class="product-tab">
+          </div>
+          -->
+          <!-- Product Tab Start -->
+      </div>
+    </div>
+  </div>
+</body>
+</html>

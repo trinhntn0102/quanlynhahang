@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Slide show header</title>
+</head>
+<body th:fragment="banner">
+
+  <!-- Slideshow Start-->
+  <div class="slideshow single-slider owl-carousel">
+    <div class="item">
+      <a href="#">
+        <img class="img-responsive" th:src="@{/assets/user/image/slider/banner-2.jpg}"/>
+      </a>
+    </div>
+    <div class="item">
+      <a href="#">
+        <img class="img-responsive" th:src="@{/assets/user/image/slider/banner-2.jpg}" alt="banner 1" />
+      </a>
+    </div>
+  </div>
+   <!-- Slideshow End-->
+
+  <!-- Banner Start-->
+  <div class="marketshop-banner">
+    <div class="row">
+      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <a href="#"><img th:src="@{/assets/user/image/banner/sample-banner-3-300x300.jpg}" alt="Sample Banner 2" title="Sample Banner 2" /></a>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <a href="#"><img th:src="@{/assets/user/image/banner/sample-banner-1-300x300.jpg}" alt="Sample Banner" title="Sample Banner" /></a>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <a href="#"><img th:src="@{/assets/user/image/banner/sample-banner-2-300x300.jpg}" alt="Sample Banner 3" title="Sample Banner 3" /></a>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <a href="#"><img th:src="@{/assets/user/image/banner/sample-banner-4-300x300.jpg}" alt="Sample Banner 4" title="Sample Banner 4" /></a>
+      </div>
+    </div>
+  </div>
+  <!-- Banner End-->
+</body>
+</html>
