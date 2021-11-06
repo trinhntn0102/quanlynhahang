@@ -1,5 +1,5 @@
 package com.qlnh.entity;
 
 public class Test {
-	private String hijfs;
+	private String hijfss;
 }
