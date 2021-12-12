@@ -20,7 +20,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "Authorities")
+@Table(name = "Authorities", uniqueConstraints = {
+		@UniqueConstraint(columnNames = {"Username", "Roleid"})
+})
 @Getter
 @Setter
 public class Authority  implements Serializable{
@@ -30,7 +32,6 @@ public class Authority  implements Serializable{
 	
 	@ManyToOne 
 	@JoinColumn(name = "Username")
-	
 	private Account account;
 	
 	@ManyToOne  

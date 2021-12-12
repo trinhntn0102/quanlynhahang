@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:fragment="dynamic(view)">
+<html xmlns:th="http://thymeleaf.org" th:fragment="dynamic(view)">
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/assets/user/js/bootstrap/css/bootstrap.min.css" />
@@ -10,26 +10,8 @@
 <link rel="stylesheet" type="text/css" href="/assets/user/css/responsive.css" />
 <link rel="stylesheet" type="text/css" href="/assets/user/css/stylesheet-skin2.css" />
 <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Droid+Sans' type='text/css'>
-<title>Home</title>
-</head>
-<body>
-  <div class="wrapper-wide">
-    <nav th:insert="~{/layout-user/layout/menu :: menu}"></nav>
-    <div id="container">
-
-      <div class="container">
-        <ul class="breadcrumb">
-          <li><a href="index.html"><i class="fa fa-home"></i></a></li>
-          <li><a href="category.html">Electronics</a></li>
-        </ul>
-      </div>
-      
-      <div class="container" th:replace="${view}"></div>
-      
-    </div>
-    <footer th:insert="~{/layout-user/layout/footer :: footer}"></footer>
-  </div>
-</body>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
 <!-- JS Part Start-->
 <script type="text/javascript" src="/assets/user/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="/assets/user/js/bootstrap/js/bootstrap.min.js"></script>
@@ -37,5 +19,44 @@
 <script type="text/javascript" src="/assets/user/js/jquery.dcjqaccordion.min.js"></script>
 <script type="text/javascript" src="/assets/user/js/owl.carousel.min.js"></script>
 <script type="text/javascript" src="/assets/user/js/custom.js"></script>
+<script type="text/javascript" src="/assets/user/js/shopping-cart-app.js"></script>
+
 <!-- JS Part End-->
+<title>Vegan</title>
+</head>
+<body ng-app="shopping-cart-app" ng-controller="shopping-cart-ctrl">
+  <div class="wrapper-wide">
+    <nav th:insert="~{/layout-user/layout/menu :: menu}"></nav>
+    <div id="container">
+      <div class="container" th:replace="${view}"></div>
+    </div>
+    <footer th:insert="~{/layout-user/layout/footer :: footer}"></footer>
+  </div>
+  <!-- Twitter Side Block Start -->
+  <div id="twitter_footer" class="twit-right sort-order-1">
+    <div class="twitter_icon"><i class="fa fa-twitter"></i></div>
+    <a class="twitter-timeline" href="https://twitter.com/" data-chrome="nofooter noscrollbar transparent" data-theme="light" data-tweet-limit="2" data-related="twitterapi,twitter" data-aria-polite="assertive" data-widget-id="347621595801608192">Tweets by @</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  </div>
+  <!-- Twitter Side Block End -->
+  <!-- Facebook Side Block Start -->
+  <div id="facebook" class="fb-right sort-order-2">
+    <div class="facebook_icon"><i class="fa fa-facebook"></i></div>
+    <div class="fb-page" data-href="https://www.facebook.com/harnishdesign/" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true" data-show-posts="false">
+      <div class="fb-xfbml-parse-ignore">
+        <blockquote cite="https://www.facebook.com/harnishdesign/"><a href="https://www.facebook.com/harnishdesign/">Harnish Design</a></blockquote>
+      </div>
+    </div>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+  </div>
+  <!-- Facebook Side Block End -->
+</body>
+
 </html>

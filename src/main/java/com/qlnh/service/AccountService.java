@@ -9,4 +9,9 @@ public interface AccountService {
 	public Account findById(String username);
 	public List<Account> findAll();
 	public List<Account> getAdministrators();
+	Account create(Account product);
+
+	Account update(Account product);
+
+	void delete(String username);
 }

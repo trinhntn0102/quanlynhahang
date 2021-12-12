@@ -26,4 +26,18 @@ public class AccountServiceImpl implements AccountService {
 	public List<Account> getAdministrators(){
 		return adao.getAdministrators();
 	}
+
+	@Override
+	public Account create(Account product) {
+		return adao.save(product);
+	}
+
+	@Override
+	public Account update(Account product) {
+		return adao.save(product);
+	}
+	
+	public void delete(String username) {
+		 adao.deleteById(username);
+	}
 }

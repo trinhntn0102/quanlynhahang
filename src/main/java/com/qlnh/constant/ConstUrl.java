@@ -4,6 +4,16 @@ public class ConstUrl {
 	//HOME PAGE
 	public static final  String ROOT="/";
 	public static final  String RESTAURANT="/restaurant";
+	public static final  String HOME="/index";
+	//
+	public static final  String ERROR="/error";
+	public static final  String ABOUT="/about";
+	public static final  String CART="/cart";
+	public static final  String CHECKOUT="/checkout";
+	public static final  String CONTACT="/contact-us";
+	public static final  String WISHLIST="/favorite";
+	public static final  String DELFAV="/delfavorite";
+	public static final  String ADDFAV="/addfavorite";
 	
 	//PRODUCT
 	public static final  String PRODUCT="/product";

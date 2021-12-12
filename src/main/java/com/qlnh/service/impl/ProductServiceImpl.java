@@ -1,10 +1,12 @@
 package com.qlnh.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import com.qlnh.dao.ProductDAO;
 import com.qlnh.entity.Product;
 import com.qlnh.service.ProductService;
@@ -25,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<Product> findByCategory(String cid) {
+	public List<Product> findByCategory(Integer cid) {
 		return pdao.findByCategory(cid);
 	}
 
@@ -47,4 +49,24 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> findByName(String name) {
 		return pdao.findByName(name);
 	}
+
+	@Override
+	public Page<Product> pageAll(Pageable page) {
+		return pdao.findAll(page);
+	}
+
+	
+	public Page<Product> pageCateAll(Pageable pagecate, Integer id) {
+		return pdao.findByCategory(pagecate, id);
+	}
+
+	public Page<Product> findByName(Pageable pageable, String name) {
+		return pdao.findByName(pageable, name);
+	}
+
+	public Product finById(Integer id) {
+		return pdao.findById(id).get();
+	}
+	
+
 }

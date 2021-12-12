@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="/assets/user/image/icon.png" rel="icon" />
+    <title>Vegan</title>
+    <meta name="description" content="Responsive and clean html template design for any kind of ecommerce webshop">
+    <!-- CSS Part Start-->
+    <link rel="stylesheet" type="text/css" href="/assets/user/js/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/user/css/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/user/css/stylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/user/css/owl.carousel.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/user/css/owl.transitions.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/user/css/responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/user/css/stylesheet-skin2.css" />
+    <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Droid+Sans' type='text/css'>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+	<script type="text/javascript" src="/assets/user/js/shopping-cart-app.js"></script>
+    <!-- CSS Part End-->
+</head>
+
+<body ng-app="shopping-cart-app" ng-controller="shopping-cart-ctrl">
+    <div class="wrapper-wide">
+        <div id="header">
+            <!-- Top Bar Start-->
+    <nav id="top" class="htop">
+      <div class="container">
+        <div class="row"> <span class="drop-icon visible-sm visible-xs"><i class="fa fa-align-justify"></i></span>
+          <div class="pull-left flip left-top">
+            <div class="links">
+              <ul>
+                <li class="mobile"><i class="fa fa-phone"></i>+91 9898777656</li>
+                <li class="email"><a href="mailto:info@marketshop.com"><i class="fa fa-envelope"></i>vegan@restaurant.com</a></li>
+              </ul>
+            </div>
+          </div>
+          <div id="menu" class="navbar pull-right flip">
+          <th:block th:unless="${#request.remoteUser}">
+            <ul class="nav navbar-nav">
+              <li><a href="/login">Đăng nhập</a></li>
+              <li><a href="/register">Đăng kí</a></li>
+            </ul>
+            </th:block>
+            <th:block th:if="${#request.remoteUser}">
+            <ul class="nav navbar-nav">
+          		<li th:if="${#request.remoteUser}"><a href="#">Welcome [[${#request.remoteUser}]]</a></li>
+          	<li>
+                                <a href="category.html"><i class="fa fa-user"></i></a>
+          	<div class="dropdown-menu">
+                    <ul>
+                      <li> <a href="/account">Thông tin tài khoản</a></li>
+                      <li> <a href="/changepass">Đổi mật khẩu</a></li>
+                      <li> <a href="/logout">Đăng xuất</a></li>
+                    </ul>
+                  </div>
+                  </li>
+          
+          	</ul>
+          	</th:block>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- Top Bar End-->
+            <!-- Header Start-->
+    <header class="header-row">
+      <div class="container">
+        <div class="table-container">
+          <!-- Logo Start -->
+          <div class="col-table-cell col-lg-6 col-md-6 col-sm-12 col-xs-12 inner">
+            <div id="logo"><a href="/index">
+              <img class="img-responsive" th:src="@{/assets/user/image/logo.png}" title="VeganRestaurant" alt="VeganRestaurant" /></a>
+            </div>
+          </div>
+          <!-- Logo End -->
+          <!-- Mini Cart Start-->
+          <div class="col-table-cell col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div id="cart">
+              <button type="button" data-toggle="dropdown" data-loading-text="Loading..." class="heading dropdown-toggle">
+              <span class="cart-icon pull-left flip"></span>
+              <span id="cart-total">{{cart.count}} món - {{cart.amount()|number:0}} đ</span></button>
+              <ul class="dropdown-menu">
+                <li>
+                  <table class="table">
+                    <tbody>
+                      <tr ng-repeat="item in cart.items">
+                        <td class="text-center"><a href="product.html"><img style="width: 50px" th:src="@{/assets/user/image/product/{{item.photo}}}"></a></td>
+                        <td class="text-left"><a href="product.html">{{item.name}}</a></td>
+                        <td class="text-right"><input ng-change="cart.saveToLocalStorage()" type="number" ng-model="item.qty" min="1" max="10" style="width:50px"></td>
+                        <td class="text-right">{{item.price | number:0}} đ</td>
+                        <td class="text-center"><button ng-click="cart.remove(item.id)" class="btn btn-danger btn-xs remove" title="Remove" onClick="" type="button"><i class="fa fa-times"></i></button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </li>
+                <li>
+                  <div>
+                    <table class="table table-bordered">
+                      <tbody>
+                        <tr>
+                          <td class="text-right"><strong>Tổng</strong></td>
+                          <td class="text-right">{{cart.amount()|number:0}} đ</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <p class="checkout"><a href="/cart" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a>&nbsp;&nbsp;&nbsp;<a href="/checkout" class="btn btn-primary"><i class="fa fa-share"></i> Thanh toán</a></p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Mini Cart End-->
+          <!-- Search Start-->
+          <div class="col-table-cell col-lg-3 col-md-3 col-sm-6 col-xs-12 inner">
+            <div id="search" class="input-group">
+            <form action="/product/{productName}" >
+              <input id="filter_name" type="text" name="productName" value="" placeholder="Tìm món ăn" class="form-control input-lg" />
+              <button type="submit" class="button-search"><i class="fa fa-search"></i></button>
+              </form>
+            </div>
+          </div>
+          <!-- Search End-->
+        </div>
+      </div>
+    </header>
+    <!-- Header End-->
+             <!-- Main Menu Start-->
+    
+      <nav id="menu" class="navbar">
+        <div class="navbar-header"> <span class="visible-xs visible-sm"> Menu <b></b></span></div>
+        <div class="container">
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            <li><a class="home_link" title="Home" href="/index">Trang chủ</a></li>
+            <li class="dropdown"><a href="/about">Giới thiệu</a>
+              
+            </li>
+                <li class="menu_brands dropdown"><a href="/product">Thực đơn</a>
+              <div class="dropdown-menu">
+                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-6">
+                <a href="#">
+                  <img th:src="@{/assets/user/image/product/goibuoi.png}" class="img-responsive" />
+                 </a>
+                 <a th:href="@{|/category/2|}">Khai vị</a>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-6">
+                <a href="#">
+                  <img th:src="@{/assets/user/image/product/phoxaochaykieuthai.png}" class="img-responsive" />
+                 </a>
+                 <a th:href="@{|/category/1|}">Điểm tâm</a>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-6">
+                <a href="#">
+                  <img th:src="@{/assets/user/image/product/laukimchi.png}" class="img-responsive" />
+                 </a>
+                 <a th:href="@{|/category/3|}">Món chính</a>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-6">
+                <a href="#">
+                  <img th:src="@{/assets/user/image/product/tauhuduongthotnot.png}" class="img-responsive" />
+                 </a>
+                 <a th:href="@{|/category/4|}">Tráng miệng</a>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-6">
+                <a href="#">
+                  <img th:src="@{/assets/user/image/product/suachuoi.png}" class="img-responsive" />
+                 </a>
+                 <a th:href="@{|/category/5|}">Thức uống</a>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-6">
+                <a href="#">
+                  <img th:src="@{/assets/user/image/product/canhnamhatsenchay.png}" class="img-responsive" />
+                 </a>
+                 <a th:href="@{|/category/6|}">Món thêm</a>
+                </div>
+                
+              </div>
+            </li>
+                <li class="dropdown"><a href="/contact">Liên hệ</a>
+                  
+                </li>
+            
+            <li class="dropdown wrap_custom_block hidden-sm hidden-xs"><th:block th:if="${#request.remoteUser}"><a href="/order/list">Đơn hàng</a></th:block>
+              
+            </li>
+            
+            <li class="custom-link-right"><th:block th:if="${#request.remoteUser}"><a href="/favorite" target="_blank">Danh sách yêu thích</a></th:block></li>
+          </ul>
+        </div>
+        </div>
+      </nav>
+    
+    <!-- Main Menu End-->
+    </div>
+    <div class="container">
+      <!-- Breadcrumb Start-->
+      <ul class="breadcrumb">
+        <li><a href="index.html"><i class="fa fa-home"></i></a></li>
+        <li><a href="contact-us.html">Contact Us</a></li>
+      </ul>
+      <!-- Breadcrumb End-->
+      <div class="row">
+        <!--Middle Part Start-->
+        <div id="content" class="col-sm-9">
+          <h1 class="title">Contact Us</h1>
+          <h3 class="subtitle">Our Location</h3>
+          <div class="row">
+            <div class="col-sm-3"><img src="image/product/store_location-275x180.jpg" alt="MarketShop Template" title="MarketShop Template" class="img-thumbnail" /></div>
+            <div class="col-sm-3"><strong>MarketShop Template</strong><br />
+              <address>
+              Central Square,<br />
+              22 Hoi Wing Road,<br />
+              New Delhi,<br />
+              India
+              </address>
+            </div>
+            <div class="col-sm-3"><strong>Telephone</strong><br>
+              +91 9898989898<br />
+              <br />
+              <strong>Fax</strong><br>
+              +91 9898989898 </div>
+            <div class="col-sm-3"> <strong>Opening Times</strong><br />
+              24X7 Customer Care<br />
+              <br />
+              <strong>Comments</strong><br />
+              This field is for any special notes you would like to tell the customer i.e. Store does not accept cheques. </div>
+          </div>
+          <form class="form-horizontal">
+            <fieldset>
+              <h3 class="subtitle">Send us an Email</h3>
+              <div class="form-group required">
+                <label class="col-md-2 col-sm-3 control-label" for="input-name">Your Name</label>
+                <div class="col-md-10 col-sm-9">
+                  <input type="text" name="name" value="" id="input-name" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-md-2 col-sm-3 control-label" for="input-email">E-Mail Address</label>
+                <div class="col-md-10 col-sm-9">
+                  <input type="text" name="email" value="" id="input-email" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-md-2 col-sm-3 control-label" for="input-enquiry">Enquiry</label>
+                <div class="col-md-10 col-sm-9">
+                  <textarea name="enquiry" rows="10" id="input-enquiry" class="form-control"></textarea>
+                </div>
+              </div>
+            </fieldset>
+            <div class="buttons">
+              <div class="pull-right">
+                <input class="btn btn-primary" type="submit" value="Submit" />
+              </div>
+            </div>
+          </form>
+        </div>
+        <aside id="column-right" class="col-sm-3 hidden-xs">
+          <div class="list-group">
+            <h2 class="subtitle">Custom Content</h2>
+            <p>This is a CMS block edited from admin. You can insert any content (HTML, Text, Images) Here. </p>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
+            <p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+          </div>
+          <div class="banner owl-carousel">
+            <div class="item"> <a href="#"><img src="image/banner/small-banner1-265x350.jpg" alt="small banner" class="img-responsive" /></a> </div>
+            <div class="item"> <a href="#"><img src="image/banner/small-banner-265x350.jpg" alt="small banner1" class="img-responsive" /></a> </div>
+          </div>
+        </aside>
+        <!--Middle Part End -->
+      </div>
+    </div>
+ 
+        <!--Footer Start-->
+        <footer id="footer">
+            <div class="fpart-first">
+                <div class="container">
+                    <div class="row">
+                        <div class="contact col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+                            <p>RESTAURANT</p>
+                            <img alt="" th:src="@{/assets/user/image/logo-small.png}">
+                        </div>
+                        <div class="column col-lg-2 col-md-2 col-sm-3 col-xs-12">
+                            <h5>Thông tin</h5>
+                            <ul>
+                                <li><a href="about-us.html">Giới thiệu</a></li>
+                                <li><a href="about-us.html">Thông tin vận chuyển</a></li>
+                                <li><a href="about-us.html">Privacy Policy</a></li>
+                                <li><a href="about-us.html">Terms &amp; Conditions</a></li>
+                            </ul>
+                        </div>
+                        <div class="column col-lg-2 col-md-2 col-sm-3 col-xs-12">
+                            <h5>Dịch vụ khách hàng</h5>
+                            <ul>
+                                <li><a href="contact-us.html">Liên hệ</a></li>
+                                <li><a href="#">Trả hàng</a></li>
+                                <li><a href="sitemap.html">Vị trí</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="column col-lg-2 col-md-2 col-sm-3 col-xs-12">
+                            <h5>Tài khoản</h5>
+                            <ul>
+                                <li><a href="#">Thông tin tài khoản</a></li>
+                                <li><a href="#">Đơn hàng</a></li>
+                                <li><a href="#">Danh sách yêu thích</a></li>
+                                <li><a href="#">Newsletter</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="fpart-second">
+                <div class="container">
+                    <div id="powered" class="clearfix">
+                        <div class="powered_text pull-left flip">
+                            <p>Vegan Restaurant © 2016 | Template By <a href="http://harnishdesign.net" target="_blank">FPL Design</a></p>
+                        </div>
+                        <div class="social pull-right flip">
+                            <a href="#" target="_blank"> <img data-toggle="tooltip" th:src="@{/assets/user/image/socialicons/facebook.png}" alt="Facebook" title="Facebook"></a>
+                            <a href="#" target="_blank"> <img data-toggle="tooltip" th:src="@{/assets/user/image/socialicons/twitter.png}" alt="Twitter" title="Twitter"> </a>
+                            <a href="#" target="_blank"> <img data-toggle="tooltip" th:src="@{/assets/user/image/socialicons/google_plus.png}" alt="Google+" title="Google+"> </a>
+                            <a href="#" target="_blank"> <img data-toggle="tooltip" th:src="@{/assets/user/image/socialicons/pinterest.png}" alt="Pinterest" title="Pinterest"> </a>
+                            <a href="#" target="_blank"> <img data-toggle="tooltip" th:src="@{/assets/user/image/socialicons/rss.png}" alt="RSS" title="RSS"> </a>
+                        </div>
+                    </div>
+                    <div class="bottom-row">
+                        <div class="payments_types">
+                            <a href="#" target="_blank"> <img data-toggle="tooltip" th:src="@{/assets/user/image/payment/payment_paypal.png}" alt="paypal" title="PayPal"></a>
+                            <a href="#" target="_blank"> <img data-toggle="tooltip" th:src="@{/assets/user/image/payment/payment_american.png}" alt="american-express" title="American Express"></a>
+                            <a href="#" target="_blank"> <img data-toggle="tooltip" th:src="@{/assets/user/image/payment/payment_2checkout.png}" alt="2checkout" title="2checkout"></a>
+                            <a href="#" target="_blank"> <img data-toggle="tooltip" th:src="@{/assets/user/image/payment/payment_maestro.png}" alt="maestro" title="Maestro"></a>
+                            <a href="#" target="_blank"> <img data-toggle="tooltip" th:src="@{/assets/user/image/payment/payment_discover.png}" alt="discover" title="Discover"></a>
+                            <a href="#" target="_blank"> <img data-toggle="tooltip" th:src="@{/assets/user/image/payment/payment_mastercard.png}" alt="mastercard" title="MasterCard"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="back-top"><a data-toggle="tooltip" title="Back to Top" href="javascript:void(0)" class="backtotop"><i class="fa fa-chevron-up"></i></a></div>
+        </footer>
+        <!--Footer End-->
+        <!-- Twitter Side Block Start -->
+        <div id="twitter_footer" class="twit-right sort-order-1">
+            <div class="twitter_icon"><i class="fa fa-twitter"></i></div>
+            <a class="twitter-timeline" href="https://twitter.com/" data-chrome="nofooter noscrollbar transparent" data-theme="light" data-tweet-limit="2" data-related="twitterapi,twitter" data-aria-polite="assertive" data-widget-id="347621595801608192">Tweets by @</a>
+            <script>
+                ! function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0],
+                        p = /^http:/.test(d.location) ? 'http' : 'https';
+                    if (!d.getElementById(id)) {
+                        js = d.createElement(s);
+                        js.id = id;
+                        js.src = p + "://platform.twitter.com/widgets.js";
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }
+                }(document, "script", "twitter-wjs");
+            </script>
+        </div>
+        <!-- Twitter Side Block End -->
+        <!-- Facebook Side Block Start -->
+        <div id="facebook" class="fb-right sort-order-2">
+            <div class="facebook_icon"><i class="fa fa-facebook"></i></div>
+            <div class="fb-page" data-href="https://www.facebook.com/harnishdesign/" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true" data-show-posts="false">
+                <div class="fb-xfbml-parse-ignore">
+                    <blockquote cite="https://www.facebook.com/harnishdesign/"><a href="https://www.facebook.com/harnishdesign/">Harnish Design</a></blockquote>
+                </div>
+            </div>
+            <div id="fb-root"></div>
+            <script>
+                (function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) return;
+                    js = d.createElement(s);
+                    js.id = id;
+                    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
+            </script>
+        </div>
+        <!-- Facebook Side Block End -->
+    </div>
+    <!-- JS Part Start-->
+    <script type="text/javascript" src="/assets/user/js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="/assets/user/js/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/user/js/jquery.easing-1.3.min.js"></script>
+    <script type="text/javascript" src="/assets/user/js/jquery.dcjqaccordion.min.js"></script>
+    <script type="text/javascript" src="/assets/user/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="/assets/user/js/custom.js"></script>
+    <!-- JS Part End-->
+</body>
+</html>

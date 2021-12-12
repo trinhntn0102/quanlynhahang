@@ -19,6 +19,11 @@ public interface OrderDetailDAO extends JpaRepository<OrderDetail, Integer> {
 			+ " FROM OrderDetail o"
 			+ " GROUP BY o.product.id")
 	List<Report> findAllByASC(Pageable pageable);
+	
+	@Query("SELECT  new Report(o.product, sum(o.quantity))" 
+			+ " FROM OrderDetail o"
+			+ " GROUP BY o.product.id")
+	List<Report> findAllByASC();
 
 	@Query("SELECT o FROM OrderDetail o WHERE o.order.id=?1")
 	List<OrderDetail> findById(Long odid);

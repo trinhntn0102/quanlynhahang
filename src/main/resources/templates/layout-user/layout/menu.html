@@ -14,68 +14,35 @@
             <div class="links">
               <ul>
                 <li class="mobile"><i class="fa fa-phone"></i>+91 9898777656</li>
-                <li class="email"><a href="mailto:info@marketshop.com"><i class="fa fa-envelope"></i>info@marketshop.com</a></li>
-                <li class="wrap_custom_block hidden-sm hidden-xs"><a>Custom Block<b></b></a>
-                  <div class="dropdown-menu custom_block">
-                    <ul>
-                      <li>
-                        <table>
-                          <tbody>
-                            <tr>
-                              <td><img alt="" th:src="@{/assets/user/image/banner/cms-block.jpg}"></td>
-                              <td><img alt="" th:src="@{/assets/user/image/banner/responsive.jpg}"></td>
-                            </tr>
-                            <tr>
-                              <td><h4>CMS Blocks</h4></td>
-                              <td><h4>Responsive Template</h4></td>
-                            </tr>
-                            <tr>
-                              <td>This is a CMS block. You can insert any content (HTML, Text, Images) Here.</td>
-                              <td>This is a CMS block. You can insert any content (HTML, Text, Images) Here.</td>
-                            </tr>
-                            <tr>
-                              <td><strong><a class="btn btn-default btn-sm" href="#">Read More</a></strong></td>
-                              <td><strong><a class="btn btn-default btn-sm" href="#">Read More</a></strong></td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div id="language" class="btn-group">
-              <button class="btn-link dropdown-toggle" data-toggle="dropdown"> <span> <img th:src="@{/assets/user/image/flags/gb.png}" alt="English" title="English">English <i class="fa fa-caret-down"></i></span></button>
-              <ul class="dropdown-menu">
-                <li>
-                  <button class="btn btn-link btn-block language-select" type="button" name="GB"><img th:src="@{/assets/user/image/flags/gb.png}" alt="English" title="English" /> English</button>
-                </li>
-                <li>
-                  <button class="btn btn-link btn-block language-select" type="button" name="GB"><img th:src="@{/assets/user/image/flags/ar.png}" alt="Arabic" title="Arabic" /> Arabic</button>
-                </li>
-              </ul>
-            </div>
-            <div id="currency" class="btn-group">
-              <button class="btn-link dropdown-toggle" data-toggle="dropdown"> <span> $ USD <i class="fa fa-caret-down"></i></span></button>
-              <ul class="dropdown-menu">
-                <li>
-                  <button class="currency-select btn btn-link btn-block" type="button" name="EUR">€ Euro</button>
-                </li>
-                <li>
-                  <button class="currency-select btn btn-link btn-block" type="button" name="GBP">£ Pound Sterling</button>
-                </li>
-                <li>
-                  <button class="currency-select btn btn-link btn-block" type="button" name="USD">$ US Dollar</button>
-                </li>
+                <li class="email"><a href="mailto:info@marketshop.com"><i class="fa fa-envelope"></i>vegan@restaurant.com</a></li>
               </ul>
             </div>
           </div>
           <div id="top-links" class="nav pull-right flip">
+          <ul>
+          		<li th:if="${#request.remoteUser}"><a href="/restaurant/login">Welcome [[${#request.remoteUser}]]</a></li>
+          	<li><th:block th:if="${#request.remoteUser}">
+          	
+          		<a class="nav-link" th:href="@{/order/list}"> <i class="fa fa-user"></i>
+          		<div class="dropdown-menu">
+                    <ul>
+                      <li> <a href="category.html">Perfumes</a></li>
+                      <li> <a href="category.html">Makeup</a></li>
+                      <li> <a href="category.html">Sun Care</a></li>
+                      <li> <a href="category.html">Skin Care</a></li>
+                      <li> <a href="category.html">Eye Care</a></li>
+                      <li> <a href="category.html">Hair Care</a></li>
+                    </ul>
+                  </div> </a>
+          	
+          </th:block></li>
+          	</ul>
+          <th:block th:unless="${#request.remoteUser}">
             <ul>
-              <li><a href="login.html">Login</a></li>
-              <li><a href="register.html">Register</a></li>
+              <li><a href="/restaurant/login">Đăng nhập</a></li>
+              <li><a href="/restaurant/register">Đăng kí</a></li>
             </ul>
+            </th:block>
           </div>
         </div>
       </div>
@@ -87,8 +54,8 @@
         <div class="table-container">
           <!-- Logo Start -->
           <div class="col-table-cell col-lg-6 col-md-6 col-sm-12 col-xs-12 inner">
-            <div id="logo"><a href="index.html">
-              <img class="img-responsive" th:src="@{/assets/user/image/logo.png}" title="MarketShop" alt="MarketShop" /></a>
+            <div id="logo"><a href="/restaurant/index">
+              <img class="img-responsive" th:src="@{/assets/user/image/logo.png}" title="VeganRestaurant" alt="VeganRestaurant" /></a>
             </div>
           </div>
           <!-- Logo End -->
@@ -97,24 +64,17 @@
             <div id="cart">
               <button type="button" data-toggle="dropdown" data-loading-text="Loading..." class="heading dropdown-toggle">
               <span class="cart-icon pull-left flip"></span>
-              <span id="cart-total">2 item(s) - $1,132.00</span></button>
+              <span id="cart-total">{{cart.count}} món - {{cart.amount|number:0}} vnđ</span></button>
               <ul class="dropdown-menu">
                 <li>
                   <table class="table">
                     <tbody>
-                      <tr>
-                        <td class="text-center"><a href="product.html"><img class="img-thumbnail" title="Xitefun Causal Wear Fancy Shoes" alt="Xitefun Causal Wear Fancy Shoes" src="image/product/sony_vaio_1-50x75.jpg"></a></td>
-                        <td class="text-left"><a href="product.html">Xitefun Causal Wear Fancy Shoes</a></td>
-                        <td class="text-right">x 1</td>
-                        <td class="text-right">$902.00</td>
-                        <td class="text-center"><button class="btn btn-danger btn-xs remove" title="Remove" onClick="" type="button"><i class="fa fa-times"></i></button></td>
-                      </tr>
-                      <tr>
-                        <td class="text-center"><a href="product.html"><img class="img-thumbnail" title="Aspire Ultrabook Laptop" alt="Aspire Ultrabook Laptop" src="image/product/samsung_tab_1-50x75.jpg"></a></td>
-                        <td class="text-left"><a href="product.html">Aspire Ultrabook Laptop</a></td>
-                        <td class="text-right">x 1</td>
-                        <td class="text-right">$230.00</td>
-                        <td class="text-center"><button class="btn btn-danger btn-xs remove" title="Remove" onClick="" type="button"><i class="fa fa-times"></i></button></td>
+                      <tr ng-repeat="item in cart.items">
+                        <td class="text-center"><a href="product.html"><img style="width: 50px" th:src="@{/assets/user/image/product/{{item.photo}}}"></a></td>
+                        <td class="text-left"><a href="product.html">{{item.name}}</a></td>
+                        <td class="text-right"><input ng-change="cart.saveToLocalStorage()" type="number" ng-model="item.qty" min="1" max="10" style="width:50px"></td>
+                        <td class="text-right">{{item.price | number:0}} vnđ</td>
+                        <td class="text-center"><button ng-click="cart.remove(item.id)" class="btn btn-danger btn-xs remove" title="Remove" onClick="" type="button"><i class="fa fa-times"></i></button></td>
                       </tr>
                     </tbody>
                   </table>
@@ -124,24 +84,12 @@
                     <table class="table table-bordered">
                       <tbody>
                         <tr>
-                          <td class="text-right"><strong>Sub-Total</strong></td>
-                          <td class="text-right">$940.00</td>
-                        </tr>
-                        <tr>
-                          <td class="text-right"><strong>Eco Tax (-2.00)</strong></td>
-                          <td class="text-right">$4.00</td>
-                        </tr>
-                        <tr>
-                          <td class="text-right"><strong>VAT (20%)</strong></td>
-                          <td class="text-right">$188.00</td>
-                        </tr>
-                        <tr>
-                          <td class="text-right"><strong>Total</strong></td>
-                          <td class="text-right">$1,132.00</td>
+                          <td class="text-right"><strong>Tổng</strong></td>
+                          <td class="text-right">{{cart.amount|number:0}} vnđ</td>
                         </tr>
                       </tbody>
                     </table>
-                    <p class="checkout"><a href="cart.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> View Cart</a>&nbsp;&nbsp;&nbsp;<a href="checkout.html" class="btn btn-primary"><i class="fa fa-share"></i> Checkout</a></p>
+                    <p class="checkout"><a href="/restaurant/cart" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a>&nbsp;&nbsp;&nbsp;<a href="/restaurant/checkout" class="btn btn-primary"><i class="fa fa-share"></i> Thanh toán</a></p>
                   </div>
                 </li>
               </ul>
@@ -151,8 +99,10 @@
           <!-- Search Start-->
           <div class="col-table-cell col-lg-3 col-md-3 col-sm-6 col-xs-12 inner">
             <div id="search" class="input-group">
-              <input id="filter_name" type="text" name="search" value="" placeholder="Search" class="form-control input-lg" />
-              <button type="button" class="button-search"><i class="fa fa-search"></i></button>
+            <form action="/restaurant/product/{productName}" >
+              <input id="filter_name" type="text" name="productName" value="" placeholder="Tìm món ăn" class="form-control input-lg" />
+              <button type="submit" class="button-search"><i class="fa fa-search"></i></button>
+              </form>
             </div>
           </div>
           <!-- Search End-->
@@ -167,8 +117,8 @@
         <div class="container">
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav">
-            <li><a class="home_link" title="Home" href="index.html">Home</a></li>
-            <li class="dropdown"><a href="category.html">Fashion</a>
+            <li><a class="home_link" title="Home" href="/restaurant/index">Trang chủ</a></li>
+            <li class="dropdown"><a href="/restaurant/about">Giới thiệu</a>
               <div class="dropdown-menu">
               <ul>
                       <li><a href="category.html">Men <span>&rsaquo;</span></a>
@@ -204,104 +154,7 @@
                     </ul>
               </div>
             </li>
-            <li class="dropdown"> <a href="category.html">Electronics</a>
-                  <div class="dropdown-menu">
-                    <ul>
-                      <li> <a href="category.html">Laptops <span>&rsaquo;</span></a>
-                        <div class="dropdown-menu">
-                          <ul>
-                            <li> <a href="category.html">New Sub Categories </a> </li>
-                            <li> <a href="category.html">New Sub Categories </a> </li>
-                            <li> <a href="category.html">Sub Categories New </a> </li>
-                          </ul>
-                        </div>
-                      </li>
-                      <li> <a href="category.html">Desktops <span>&rsaquo;</span></a>
-                        <div class="dropdown-menu">
-                          <ul>
-                            <li> <a href="category.html">New Sub Categories </a> </li>
-                            <li> <a href="category.html">Sub Categories New </a> </li>
-                            <li> <a href="category.html">Sub Categories New </a> </li>
-                          </ul>
-                        </div>
-                      </li>
-                      <li> <a href="category.html">Cameras <span>&rsaquo;</span></a>
-                        <div class="dropdown-menu">
-                          <ul>
-                            <li> <a href="category.html">New Sub Categories</a></li>
-                          </ul>
-                        </div>
-                      </li>
-                      <li><a href="category.html">Mobile Phones <span>&rsaquo;</span></a>
-                        <div class="dropdown-menu">
-                          <ul>
-                            <li><a href="category.html">New Sub Categories</a></li>
-                            <li><a href="category.html">New Sub Categories</a></li>
-                          </ul>
-                        </div>
-                      </li>
-                      <li><a href="category.html">TV &amp; Home Audio <span>&rsaquo;</span></a>
-                        <div class="dropdown-menu">
-                          <ul>
-                            <li><a href="category.html">New Sub Categories </a> </li>
-                            <li><a href="category.html">Sub Categories New </a> </li>
-                          </ul>
-                        </div>
-                      </li>
-                      <li><a href="category.html">MP3 Players</a> </li>
-                    </ul>
-                  </div>
-                </li>
-                <li class="dropdown"><a href="category.html">Shoes</a>
-                  <div class="dropdown-menu">
-                    <ul>
-                      <li><a href="category.html">Men</a> </li>
-                      <li><a href="category.html">Women <span>&rsaquo;</span></a>
-                        <div class="dropdown-menu">
-                          <ul>
-                            <li><a href="category.html">New Sub Categories </a> </li>
-                            <li><a href="category.html">Sub Categories </a> </li>
-                          </ul>
-                        </div>
-                      </li>
-                      <li><a href="category.html">Girls</a> </li>
-                      <li><a href="category.html">Boys</a> </li>
-                      <li><a href="category.html">Baby</a> </li>
-                      <li><a href="category.html">Accessories <span>&rsaquo;</span></a>
-                        <div class="dropdown-menu">
-                          <ul>
-                            <li><a href="category.html">New Sub Categories</a></li>
-                            <li><a href="category.html">New Sub Categories</a></li>
-                            <li><a href="category.html">Sub Categories</a></li>
-                          </ul>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-                <li class="dropdown"> <a href="category.html">Watches</a>
-                  <div class="dropdown-menu">
-                    <ul>
-                      <li> <a href="category.html">Men's Watches</a></li>
-                      <li> <a href="category.html">Women's Watches</a></li>
-                      <li> <a href="category.html">Kids' Watches</a></li>
-                      <li> <a href="category.html">Accessories</a></li>
-                    </ul>
-                  </div>
-                </li>
-                <li class="dropdown"><a href="category.html">Health &amp; Beauty</a>
-                  <div class="dropdown-menu">
-                    <ul>
-                      <li> <a href="category.html">Perfumes</a></li>
-                      <li> <a href="category.html">Makeup</a></li>
-                      <li> <a href="category.html">Sun Care</a></li>
-                      <li> <a href="category.html">Skin Care</a></li>
-                      <li> <a href="category.html">Eye Care</a></li>
-                      <li> <a href="category.html">Hair Care</a></li>
-                    </ul>
-                  </div>
-                </li>
-            <li class="menu_brands dropdown"><a href="#">Brands</a>
+                <li class="menu_brands dropdown"><a href="/restaurant/product">Thực đơn</a>
               <div class="dropdown-menu">
                 <div class="col-lg-1 col-md-2 col-sm-3 col-xs-6">
                 <a href="#">
@@ -323,7 +176,20 @@
                 
               </div>
             </li>
-            <li class="dropdown wrap_custom_block hidden-sm hidden-xs"><a>Custom Block</a>
+                <li class="dropdown"><a href="/restaurant/contact">Liên hệ</a>
+                  <div class="dropdown-menu">
+                    <ul>
+                      <li> <a href="category.html">Perfumes</a></li>
+                      <li> <a href="category.html">Makeup</a></li>
+                      <li> <a href="category.html">Sun Care</a></li>
+                      <li> <a href="category.html">Skin Care</a></li>
+                      <li> <a href="category.html">Eye Care</a></li>
+                      <li> <a href="category.html">Hair Care</a></li>
+                    </ul>
+                  </div>
+                </li>
+            
+            <li class="dropdown wrap_custom_block hidden-sm hidden-xs"><th:block th:if="${#request.remoteUser}"><a href="/order/list">Đơn hàng</a></th:block>
               <div class="dropdown-menu custom_block">
                 <ul>
                   <li>
@@ -355,30 +221,8 @@
                 </ul>
               </div>
             </li>
-            <li class="dropdown information-link"><a>Pages</a>
-              <div class="dropdown-menu">
-                <ul>
-                  <li><a href="login.html">Login</a></li>
-                  <li><a href="register.html">Register</a></li>
-                  <li><a href="category.html">Category (Grid/List)</a></li>
-                  <li><a href="product.html">Product</a></li>
-                  <li><a href="cart.html">Shopping Cart</a></li>
-                  <li><a href="checkout.html">Checkout</a></li>
-                  <li><a href="compare.html">Compare</a></li>
-                  <li><a href="wishlist.html">Wishlist</a></li>
-                  <li><a href="search.html">Search</a></li>
-                </ul>
-                <ul>
-                  <li><a href="about-us.html">About Us</a></li>
-                  <li><a href="404.html">404</a></li>
-                  <li><a href="elements.html">Elements</a></li>
-                  <li><a href="faq.html">Faq</a></li>
-                  <li><a href="sitemap.html">Sitemap</a></li>
-                  <li><a href="contact-us.html">Contact Us</a></li>
-                </ul>
-              </div>
-            </li>
-            <li class="custom-link-right"><a href="#" target="_blank"> Buy Now!</a></li>
+            
+            <li class="custom-link-right"><th:block th:if="${#request.remoteUser}"><a href="/restaurant/like" target="_blank">Danh sách yêu thích</a></th:block></li>
           </ul>
         </div>
         </div>

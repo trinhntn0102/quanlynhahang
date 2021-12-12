@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -54,5 +55,13 @@ public class Product  implements Serializable{
 	@OneToMany(mappedBy = "product")
 	private List<OrderDetail> orderDetails;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "product")
+	List<Favorite> productid;
+	
 	private String photo;
+	private String photo2;
+	private String photo3;
+	private String photo4;
+	
 }

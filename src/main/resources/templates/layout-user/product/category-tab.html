@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Category</title>
 </head>
 <body th:fragment="category">
-  <h3 class="subtitle">Categories</h3>
+  <h3 class="subtitle">Loại món</h3>
   <div class="box-category">
   
   <!--  
@@ -18,131 +18,79 @@
     
     <ul id="cat_accordion">
       <li>
-        <a href="category.html">ALL</a>
+        <a href="/product">Tất cả</a>
       </li>
       <li th:each="cate: ${categories}">
-        <a th:text="${cate.name}" th:href="@{|/restaurant/category/${cate.id}|}" class="bg-danger">Category name</a> <span class="down"></span>
-          <ul>
-              <li><a href="category.html">Women</a></li>
-              <li><a href="category.html">Boys</a></li>
-              <li><a href="category.html">Baby</a></li>
-          </ul>
+        <a th:text="${cate.name}" th:href="@{|/category/${cate.id}|}" class="bg-danger">Category name</a> 
        </li>
     </ul>
   </div>
-  <h3 class="subtitle">Bestsellers</h3>
+  <h3 class="subtitle">Bán chạy</h3>
   <div class="side-item">
-    <div class="product-thumb clearfix">
+    <div th:each="p:${bestSeller}" class="product-thumb clearfix">
       <div class="image">
-        <a href="product.html"><img th:src="@{/assets/user/image/product/apple_cinema_30-50x75.jpg}" alt="Brand Fashion Cotton T-Shirt"
-          title="Brand Fashion Cotton T-Shirt" class="img-responsive" /></a>
+        <a href="product.html"><img th:src="@{|/assets/user/image/product/${p.group.photo}|}" alt="Brand Fashion Cotton T-Shirt"
+          class="img-responsive" /></a>
       </div>
       <div class="caption">
         <h4>
-          <a href="product.html">Brand Fashion Cotton T-Shirt</a>
+          <a href="product.html" th:text="${p.group.name}">name</a>
         </h4>
         <p class="price">
-          <span class="price-new">$110.00</span> <span class="price-old">$122.00</span> <span class="saving">-10%</span>
+          <th:block th:if="${p.group.discount != null AND p.group.discount > 0}">
+													<span
+														th:text="${#numbers.formatDecimal(p.group.price - p.group.price/100, 0, 'COMMA', 0, 'POINT')} + '₫'"
+														class="price-new">price</span>
+													<span
+														th:text="${#numbers.formatDecimal(p.group.price, 0, 'COMMA', 0, 'POINT')} + '₫'"
+														class="price-old"></span>
+													<span th:text="${p.group.discount} +'%'" class="saving">discount
+														percent</span>
+												</th:block>
+												<th:block
+													th:unless="${p.group.discount != null AND p.group.discount > 0}">
+													<span
+														th:text="${#numbers.formatDecimal(p.group.price, 0, 'COMMA', 0, 'POINT')} + '₫'"
+														class="price-new"></span>
+												</th:block>
         </p>
       </div>
     </div>
-    <div class="product-thumb clearfix">
-      <div class="image">
-        <a href="product.html"><img th:src="@{/assets/user/image/product/iphone_1-50x75.jpg}" alt="iPhone5" title="iPhone5" class="img-responsive" /></a>
-      </div>
-      <div class="caption">
-        <h4>
-          <a href="product.html">iPhone5</a>
-        </h4>
-        <p class="price">$123.20</p>
-        <div class="rating">
-          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i
-            class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i
-            class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i
-            class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i
-            class="fa fa-star-o fa-stack-2x"></i></span>
-        </div>
-      </div>
-    </div>
-    <div class="product-thumb clearfix">
-      <div class="image">
-        <a href="product.html"><img th:src="@{/assets/user/image/product/macbook_1-50x75.jpg}" alt="Ideapad Yoga 13-59341124 Laptop"
-          title="Ideapad Yoga 13-59341124 Laptop" class="img-responsive" /></a>
-      </div>
-      <div class="caption">
-        <h4>
-          <a href="product.html">Ideapad Yoga 13-59341124 Laptop</a>
-        </h4>
-        <p class="price">$2.00</p>
-        <div class="rating">
-          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i
-            class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i
-            class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i
-            class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i
-            class="fa fa-star-o fa-stack-2x"></i></span>
-        </div>
-      </div>
-    </div>
-    <div class="product-thumb clearfix">
-      <div class="image">
-        <a href="product.html"><img th:src="@{/assets/user/image/product/sony_vaio_1-50x75.jpg}" alt="Xitefun Causal Wear Fancy Shoes"
-          title="Xitefun Causal Wear Fancy Shoes" class="img-responsive" /></a>
-      </div>
-      <div class="caption">
-        <h4>
-          <a href="product.html">Xitefun Causal Wear Fancy Shoes</a>
-        </h4>
-        <p class="price">
-          <span class="price-new">$902.00</span> <span class="price-old">$1,202.00</span> <span class="saving">-25%</span>
-        </p>
-        <div class="rating">
-          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i
-            class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i
-            class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i
-            class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i
-            class="fa fa-star-o fa-stack-2x"></i></span>
-        </div>
-      </div>
-    </div>
-    <div class="product-thumb clearfix">
-      <div class="image">
-        <a href="product.html"><img th:src="@{/assets/user/image/product/FinePix-Long-Zoom-Camera-50x75.jpg}"
-          alt="FinePix S8400W Long Zoom Camera" title="FinePix S8400W Long Zoom Camera" class="img-responsive" /></a>
-      </div>
-      <div class="caption">
-        <h4>
-          <a href="product.html">FinePix S8400W Long Zoom Camera</a>
-        </h4>
-        <p class="price">$122.00</p>
-      </div>
-    </div>
+    
+    
+    
+    
   </div>
-  <h3 class="subtitle">Specials</h3>
+  <h3 class="subtitle">Đặc biệt</h3>
   <div class="side-item">
-    <div class="product-thumb clearfix">
+    <div th:each="p:${product3}" class="product-thumb clearfix">
       <div class="image">
-        <a href="product.html"><img th:src="@{/assets/user/image/product/macbook_pro_1-50x75.jpg}"
-          alt=" Strategies for Acquiring Your Own Laptop " title=" Strategies for Acquiring Your Own Laptop " class="img-responsive" /></a>
+        <a href="product.html"><img th:src="@{|/assets/user/image/product/${p.photo}|}" 
+          class="img-responsive" /></a>
       </div>
       <div class="caption">
         <h4>
-          <a href="product.html">Strategies for Acquiring Your Own Laptop</a>
+          <a href="product.html" th:text="${p.name}">name</a>
         </h4>
         <p class="price">
-          <span class="price-new">$1,400.00</span> <span class="price-old">$1,900.00</span> <span class="saving">-26%</span>
+          <th:block th:if="${p.discount != null AND p.discount > 0}">
+													<span
+														th:text="${#numbers.formatDecimal(p.price - p.price/100, 0, 'COMMA', 0, 'POINT')} + '₫'"
+														class="price-new">price</span>
+													<span
+														th:text="${#numbers.formatDecimal(p.price, 0, 'COMMA', 0, 'POINT')} + '₫'"
+														class="price-old"></span>
+													<span th:text="${p.discount} +'%'" class="saving">discount
+														percent</span>
+												</th:block>
+												<th:block
+													th:unless="${p.discount != null AND p.discount > 0}">
+													<span
+														th:text="${#numbers.formatDecimal(p.price, 0, 'COMMA', 0, 'POINT')} + '₫'"
+														class="price-new"></span>
+												</th:block>
         </p>
       </div>
-    </div>
-
-  </div>
-  <div class="banner owl-carousel">
-    <div class="item">
-      <a href="#"> <img th:src="@{/assets/user/image/banner/small-banner1-265x350.jpg}" alt="small banner" class="img-responsive" />
-      </a>
-    </div>
-    <div class="item">
-      <a href="#"> <img th:src="@{/assets/user/image/banner/small-banner-265x350.jpg}" alt="small banner1" class="img-responsive" />
-      </a>
     </div>
   </div>
 </body>

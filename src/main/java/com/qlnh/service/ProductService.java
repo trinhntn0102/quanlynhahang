@@ -1,7 +1,9 @@
 package com.qlnh.service;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.qlnh.entity.Product;
@@ -10,9 +12,7 @@ public interface ProductService {
 
 	List<Product> findAll();
 
-	Product findById(Integer id);
-
-	List<Product> findByCategory(String cid);
+	List<Product> findByCategory(Integer cid);
 
 	Product create(Product product);
 
@@ -22,5 +22,11 @@ public interface ProductService {
 	
 	List<Product> findByName(String name);
 
+	Page<Product> pageAll(Pageable page);
+	
+	Page<Product> pageCateAll(Pageable pagecate, Integer id);
 
+	Page<Product> findByName(Pageable pageable, String string);
+	
+	Product findById(Integer id);
 }

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/layout-user/layout-user.html :: dynamic(~{::body})}">
+<head>
+<meta charset="utf-8">
+<title>Dánh sách đơn hàng</title>
+</head>
+
+<body>
+	<div class="wrapper-wide">
+		<div id="container">
+			<div class="container">
+				<!-- Breadcrumb Start-->
+				<ul class="breadcrumb">
+					<li><a href="index.html"><i class="fa fa-home"></i></a></li>
+					<li><a href="cart.html">Danh sách đơn hàng</a></li>
+				</ul>
+				<!-- Breadcrumb End-->
+				<div class="row">
+					<!--Middle Part Start-->
+					<div id="content" class="col-sm-12">
+						<h1 class="title">Đơn hàng</h1>
+						<div class="table-responsive">
+							<table class="table table-bordered">
+								<thead style="font-weight: bold; font-size: 20px">
+									<tr>
+										<th scope="col">No.</th>
+										<th scope="col">Mã đơn hàng</th>
+										<th scope="col">Ngày đặt hàng</th>
+										<th scope="col">Địa chỉ</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="order, state: ${orders}">
+										<td>[[${state.index}]]</td>
+										<td>[[${order.id}]]</td>
+										<td>[[${order.createDate}]]</td>
+										<td>[[${order.address}]]</td>
+										<td><a th:href="@{|/order/detail/${order.id}|}"
+											class="btn btn-primary"> <b class="fa fa-search"></b>
+										</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>
